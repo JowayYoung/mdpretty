@@ -5,6 +5,7 @@ function CreateWindow() {
 	const mainWindow = new BrowserWindow({ height: 800, width: 1200 });
 	if (process.env.NODE_ENV === "dev") {
 		mainWindow.loadURL("http://127.0.0.1:9999");
+		mainWindow.webContents.openDevTools();
 	} else {
 		const entry = Path.join(__dirname, "./dist/test/index.html");
 		mainWindow.loadFile(entry);
