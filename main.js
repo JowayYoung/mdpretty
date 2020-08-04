@@ -1,9 +1,14 @@
+const Path = require("path");
 const { app, BrowserWindow } = require("electron");
 
 function CreateWindow() {
-	let mainWindow = new BrowserWindow({ height: 800, width: 1200 });
-	mainWindow.loadURL("http://127.0.0.1:9999");
-	mainWindow.on("closed", () => mainWindow = null);
+	const mainWindow = new BrowserWindow({ height: 800, width: 1200 });
+	if (process.env.NODE_ENV === "dev") {
+		mainWindow.loadURL("http://127.0.0.1:9999");
+	} else {
+		const entry = Path.join(__dirname, "./dist/test/index.html");
+		mainWindow.loadFile(entry);
+	}
 }
 
 // Electron初始完成并创建窗口时触发

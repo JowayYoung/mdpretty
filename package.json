@@ -7,8 +7,8 @@
 	"license": "MIT",
 	"main": "main.js",
 	"scripts": {
-		"e-start": "electron .",
-		"w-start": "bruce b"
+		"build": "cross-env NODE_ENV=prod electron-packager . mdpretty --all --overwrite --out ./dist/app --electron-version 9.1.2 --icon ./favicon.jpg",
+		"dev": "cross-env NODE_ENV=dev electron ."
 	},
 	"dependencies": {
 		"@hot-loader/react-dom": "16.13.0",
@@ -19,7 +19,9 @@
 		"react-router-dom": "5.2.0"
 	},
 	"devDependencies": {
-		"electron": "9.1.2"
+		"cross-env": "7.0.2",
+		"electron": "9.1.2",
+		"electron-packager": "15.0.0"
 	},
 	"engines": {
 		"node": ">= 12.0.0",
