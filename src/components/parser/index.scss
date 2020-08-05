@@ -1,0 +1,16 @@
+.parser-component {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.parser-box {
+	display: flex;
+	flex: 1;
+	margin-top: 20px;
+}
+.parser-editor {
+	width: 50%;
+}
+.parser-monitor {
+	width: 50%;
+}

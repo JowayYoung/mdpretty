@@ -4,6 +4,7 @@ import { DeleteFilled, DeleteOutlined, FolderOpenOutlined, FolderOutlined, FileM
 import Classnames from "classnames";
 
 import "./index.scss";
+import Parser from "../../components/parser";
 
 const { Item: BreadcrumbItem } = Breadcrumb;
 const { Search } = Input;
@@ -60,7 +61,9 @@ function Editor() {
 	const breadcrumbDom = target?.path
 		? <Breadcrumb>{target.path.map(v => <BreadcrumbItem key={v}>{v}</BreadcrumbItem>)}</Breadcrumb>
 		: null;
-	const documentDom = target ? target.title : <Empty description="请选择文档或创建文档" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+	const documentDom = target
+		? <Parser item={target} />
+		: <Empty description="请选择文档或创建文档" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 	return (
 		<Layout className="editor-view">
 			<Sider collapsible theme="light" width={300} collapsed={collapsed} onCollapse={flag => setCollapsed(flag)}>

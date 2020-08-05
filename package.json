@@ -15,11 +15,14 @@
 		"@hot-loader/react-dom": "16.13.0",
 		"antd": "4.5.2",
 		"classnames": "2.2.6",
+		"codemirror": "5.56.0",
 		"prop-types": "15.7.2",
 		"react": "16.13.1",
+		"react-codemirror2": "7.2.1",
 		"react-dom": "16.13.1",
 		"react-hot-loader": "4.12.21",
-		"react-router-dom": "5.2.0"
+		"react-router-dom": "5.2.0",
+		"trample": "0.2.3"
 	},
 	"devDependencies": {
 		"cross-env": "7.0.2",
