@@ -3,11 +3,11 @@ const { app, BrowserWindow } = require("electron");
 
 function CreateWindow() {
 	const mainWindow = new BrowserWindow({
-		height: 800,
-		minHeight: 800,
-		minWidth: 1200,
+		height: 1200,
+		minHeight: 1200,
+		minWidth: 1600,
 		// resizable: false,
-		width: 1200
+		width: 1600
 	});
 	if (process.env.NODE_ENV === "dev") {
 		mainWindow.loadURL("http://127.0.0.1:9999");

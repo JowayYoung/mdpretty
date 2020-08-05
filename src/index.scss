@@ -16,9 +16,12 @@ body {
 	-webkit-tap-highlight-color: transparent;
 }
 .index-page {
+	display: flex;
 	overflow: hidden;
+	flex-direction: column;
 	height: 100vh;
 }
 [class*=-view] {
-	height: calc(100vh - 50px);
+	overflow: hidden;
+	flex: 1;
 }

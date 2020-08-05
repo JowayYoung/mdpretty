@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UnControlled as ReactCodemirror } from "react-codemirror2";
 import { Input } from "antd";
 import { FireOutlined } from "@ant-design/icons";
@@ -26,6 +26,10 @@ function Parser({ item }) {
 	const [title, setTitle] = useState("Hello World");
 	const [content, setContent] = useState("# I Love Mdpretty");
 	console.log(title, content);
+	useEffect(() => {
+		const height = document.getElementsByClassName("parser-box")[0].clientHeight;
+		document.getElementsByClassName("CodeMirror")[0].style.height = height + "px";
+	}, []);
 	return (
 		<div className="parser-component">
 			<Input allowClear size="large" placeholder="请输入标题" value={title} prefix={<FireOutlined />} onChange={e => setTitle(e.target.value)} />
