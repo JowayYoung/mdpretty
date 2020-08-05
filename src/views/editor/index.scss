@@ -1,0 +1,45 @@
+.editor-view {
+	.ant-layout-sider-children {
+		display: flex;
+		flex-direction: column;
+	}
+	.ant-menu-root {
+		overflow-x: hidden;
+		overflow-y: auto;
+		flex: 1;
+		border-right: none;
+	}
+	.ant-breadcrumb {
+		padding: 10px 20px;
+	}
+	.ant-layout-sider-trigger {
+		border-top: 1px solid #f0f0f0;
+	}
+	.ant-layout-content {
+		display: flex;
+		flex-direction: column;
+	}
+}
+.editor-handler {
+	display: flex;
+	padding: 10px;
+	.ant-input-search {
+		flex: 1;
+	}
+	.ant-btn-circle {
+		margin-left: 10px;
+	}
+	&.collapsed {
+		justify-content: center;
+		.ant-input-search {
+			display: none;
+		}
+		.ant-btn-circle {
+			margin-left: 0;
+		}
+	}
+}
+.editor-area {
+	flex: 1;
+	padding: 10px 20px;
+}
