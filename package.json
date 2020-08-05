@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"main": "main.js",
 	"scripts": {
-		"build": "cross-env NODE_ENV=prod electron-packager . Mdpretty --all --overwrite --out ./dist/app --electron-version 9.1.2 --icon ./favicon.jpg",
+		"build": "cross-env NODE_ENV=prod electron-packager . Mdpretty --all --overwrite --out ./dist/app --electron-version 9.1.2 --icon ./favicon.ico",
 		"dev": "cross-env NODE_ENV=dev electron ."
 	},
 	"dependencies": {
