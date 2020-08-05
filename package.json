@@ -1,5 +1,5 @@
 {
-	"name": "mdpretty",
+	"name": "Mdpretty",
 	"version": "1.0.0",
 	"description": "",
 	"keywords": [],
@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"main": "main.js",
 	"scripts": {
-		"build": "cross-env NODE_ENV=prod electron-packager . mdpretty --all --overwrite --out ./dist/app --electron-version 9.1.2 --icon ./favicon.jpg",
+		"build": "cross-env NODE_ENV=prod electron-packager . Mdpretty --all --overwrite --out ./dist/app --electron-version 9.1.2 --icon ./favicon.jpg",
 		"dev": "cross-env NODE_ENV=dev electron ."
 	},
 	"dependencies": {

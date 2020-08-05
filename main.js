@@ -2,7 +2,13 @@ const Path = require("path");
 const { app, BrowserWindow } = require("electron");
 
 function CreateWindow() {
-	const mainWindow = new BrowserWindow({ height: 800, width: 1200 });
+	const mainWindow = new BrowserWindow({
+		height: 800,
+		minHeight: 800,
+		minWidth: 1200,
+		// resizable: false,
+		width: 1200
+	});
 	if (process.env.NODE_ENV === "dev") {
 		mainWindow.loadURL("http://127.0.0.1:9999");
 		mainWindow.webContents.openDevTools();
