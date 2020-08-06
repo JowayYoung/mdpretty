@@ -1,14 +1,8 @@
-import Highlight from "highlight.js";
-import MarkdownIt from "markdown-it";
-import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
-
 const EDITOR_OPTS = {
 	autoCloseBrackets: true,
 	autoCloseTags: true,
-	extraKeys: { Ctrl: "autocomplete" },
 	indentUnit: 4,
 	indentWithTabs: true,
-	keyMap: "sublime",
 	lineNumbers: true,
 	lineWrapping: true,
 	matchBrackets: true,
@@ -18,12 +12,35 @@ const EDITOR_OPTS = {
 	theme: "material"
 };
 
-const MD_RENDER = MarkdownIt({
-	highlight: (str, lang) => lang && Highlight.getLanguage(lang) ? Highlight.highlight(lang, str).value : "",
-	html: true
-}).use(MarkdownItTaskCheckbox, { disabled: true });
+const FILES = [{
+	id: "life",
+	list: new Array(10).fill(0).map((v, i) => ({
+		content: "# I Love Mdpretty",
+		id: i + 1,
+		time: "2020-08-05",
+		title: "文件名" + (i + 1)
+	})),
+	title: "生活"
+}, {
+	id: "study",
+	list: new Array(10).fill(0).map((v, i) => ({
+		content: "# I Love Mdpretty",
+		id: i + 11,
+		time: "2020-08-05",
+		title: "文件名" + (i + 11)
+	})),
+	title: "学习"
+}, {
+	id: "work",
+	list: [],
+	title: "工作"
+}, {
+	id: "trash",
+	list: [],
+	title: "回收站"
+}];
 
 export {
 	EDITOR_OPTS,
-	MD_RENDER
+	FILES
 };

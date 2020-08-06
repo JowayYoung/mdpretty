@@ -4,6 +4,7 @@ import { DeleteFilled, DeleteOutlined, FolderOpenOutlined, FolderOutlined, FileM
 import Classnames from "classnames";
 
 import "./index.scss";
+import { FILES } from "../../utils/getting";
 import Parser from "../../components/parser";
 
 const { Item: BreadcrumbItem } = Breadcrumb;
@@ -11,34 +12,8 @@ const { Search } = Input;
 const { Content, Sider } = Layout;
 const { Item: MenuItem, SubMenu } = Menu;
 
-const FILES = [{
-	id: "life",
-	list: new Array(10).fill(0).map((v, i) => ({
-		id: i + 1,
-		time: "2020-08-05",
-		title: "文件名" + (i + 1)
-	})),
-	title: "生活"
-}, {
-	id: "study",
-	list: new Array(10).fill(0).map((v, i) => ({
-		id: i + 11,
-		time: "2020-08-05",
-		title: "文件名" + (i + 11)
-	})),
-	title: "学习"
-}, {
-	id: "work",
-	list: [],
-	title: "工作"
-}, {
-	id: "trash",
-	list: [],
-	title: "回收站"
-}];
-
 function Editor() {
-	const [collapsed, setCollapsed] = useState(false);
+	const [collapsed, setCollapsed] = useState(true);
 	const [openMenu, setOpenMenu] = useState([]);
 	const [target, setTarget] = useState(null);
 	const selectTarget = e => {
@@ -47,6 +22,8 @@ function Editor() {
 		const item = submenu.list.find(v => v.id === +itemId);
 		setTarget({ ...item, path: [submenu.title, item.title] });
 	};
+	const changeTitle = val => setTarget({ ...target, title: val });
+	const changeContent = val => setTarget({ ...target, content: val });
 	const menuDom = FILES.map(v => {
 		const folderIcon = openMenu.includes(v.id) ? <FolderOpenOutlined /> : <FolderOutlined />;
 		const trashIcon = openMenu.includes(v.id) ? <DeleteFilled /> : <DeleteOutlined />;
@@ -61,9 +38,6 @@ function Editor() {
 	const breadcrumbDom = target?.path
 		? <Breadcrumb>{target.path.map(v => <BreadcrumbItem key={v}>{v}</BreadcrumbItem>)}</Breadcrumb>
 		: null;
-	const documentDom = target
-		? <Parser item={target} />
-		: <Empty description="请选择文档或创建文档" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 	return (
 		<Layout className="editor-view">
 			<Sider collapsible theme="light" width={300} collapsed={collapsed} onCollapse={flag => setCollapsed(flag)}>
@@ -76,7 +50,7 @@ function Editor() {
 			<Layout>
 				<Content>
 					{breadcrumbDom}
-					<div className={Classnames("editor-area", { "flex-ct-y": !target })}>{documentDom}</div>
+					<Parser target={target} onChangeTitle={changeTitle} onChangeContent={changeContent} />
 				</Content>
 			</Layout>
 		</Layout>

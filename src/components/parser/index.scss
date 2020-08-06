@@ -1,14 +1,16 @@
 .parser-component {
 	display: flex;
 	flex-direction: column;
+	padding: 10px 10px;
 	height: 100%;
 }
-.parser-box {
-	display: flex;
+.parser-title {
+	width: 50%;
+}
+.parser-editor {
 	flex: 1;
 	margin-top: 20px;
-}
-.parser-editor,
-.parser-previewer {
-	width: 50%;
+	.CodeMirror {
+		width: 50%;
+	}
 }

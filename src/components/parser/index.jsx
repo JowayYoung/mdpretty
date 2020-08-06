@@ -1,53 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { UnControlled as ReactCodemirror } from "react-codemirror2";
-import { Input } from "antd";
+import React, { useEffect, useRef } from "react";
+import { Empty, Input } from "antd";
 import { FireOutlined } from "@ant-design/icons";
+import Codemirror from "codemirror";
+import Highlight from "highlight.js";
+import MarkdownIt from "markdown-it";
+import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
 import PropTypes from "prop-types";
 
+import "codemirror/addon/dialog/dialog.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
-import "../../assets/css/markdown.scss";
 import "../../assets/css/atom-one-dark.scss";
+import "../../assets/css/markdown.scss";
 import "./index.scss";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/matchbrackets";
 import "codemirror/addon/edit/matchtags";
+import "codemirror/addon/search/search";
 import "codemirror/addon/selection/active-line";
-import "codemirror/keymap/sublime";
 import "codemirror/mode/css/css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/jsx/jsx";
 import "codemirror/mode/markdown/markdown";
 import "codemirror/mode/vue/vue";
 import "codemirror/mode/xml/xml";
-import { EDITOR_OPTS, MD_RENDER } from "../../utils/getting";
+import { EDITOR_OPTS } from "../../utils/getting";
 
-function Parser({ item }) {
-	if (!item) return null;
-	const [title, setTitle] = useState("Hello World");
-	const [markdown, setMarkdown] = useState("# I Love Mdpretty");
-	const html = MD_RENDER.render(markdown);
+const MD_RENDER = MarkdownIt({
+	highlight: (str, lang) => lang && Highlight.getLanguage(lang)
+		? Highlight.highlight(lang, str).value
+		: "",
+	html: true
+}).use(MarkdownItTaskCheckbox, { disabled: true });
+
+console.log(MD_RENDER);
+
+function Parser({ onChangeContent, onChangeTitle, target }) {
+	if (!target) {
+		return (
+			<div className="parser-component flex-ct-x">
+				<Empty description="请选择文档或创建文档" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+			</div>
+		);
+	}
+	const textarea = useRef(null);
 	useEffect(() => {
-		const height = document.getElementsByClassName("parser-box")[0].clientHeight;
+		const cm = Codemirror.fromTextArea(textarea.current, EDITOR_OPTS);
+		const height = textarea.current.parentNode.offsetHeight;
 		document.getElementsByClassName("CodeMirror")[0].style.height = height + "px";
+		cm.on("change", doc => onChangeContent(doc.getValue()));
+		return () => cm.toTextArea();
 	}, []);
 	return (
 		<div className="parser-component">
-			<Input allowClear size="large" placeholder="请输入标题" value={title} prefix={<FireOutlined />} onChange={e => setTitle(e.target.value)} />
-			<div className="parser-box">
-				<ReactCodemirror className="parser-editor" value={markdown} options={EDITOR_OPTS} onChange={(e, d, val) => setMarkdown(val)} />
-				<div className="parser-previewer markdown-preview" dangerouslySetInnerHTML={{ __html: html }}></div>
+			<Input allowClear
+				className="parser-title"
+				size="large"
+				placeholder="请输入标题"
+				value={target.title}
+				prefix={<FireOutlined />}
+				onChange={e => onChangeTitle(e.target.value)} />
+			<div className="parser-editor">
+				<textarea ref={textarea} defaultValue={target.content} autoComplete="off"></textarea>
 			</div>
 		</div>
 	);
 }
 
 Parser.propTypes = {
-	item: PropTypes.object
+	onChangeContent: PropTypes.func,
+	onChangeTitle: PropTypes.func,
+	target: PropTypes.object
 };
 Parser.defaultProps = {
-	item: null
+	onChangeContent: null,
+	onChangeTitle: null,
+	target: null
 };
 
 export default Parser;
