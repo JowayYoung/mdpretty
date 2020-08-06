@@ -10,7 +10,9 @@ module.exports = {
 	openPath: "", // 开发环境下浏览器打开后显示URL路径
 	proxy: {}, // 接口代理
 	style: "scss", // 样式格式
-	stylelintIgnores: [], // Stylelint忽略路径列表
+	stylelintIgnores: [
+		"src/assets/css/atom-one-dark.scss"
+	], // Stylelint忽略路径列表
 	stylelintRules: {}, // Stylelint校验规则列表
 	successCb: null, // 构建成功回调函数
 	uploadOpts: null, // 上传配置函数
