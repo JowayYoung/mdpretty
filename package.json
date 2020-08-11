@@ -1,5 +1,5 @@
 {
-	"name": "Mdpretty",
+	"name": "mdpretty",
 	"version": "1.0.0",
 	"description": "",
 	"keywords": [],
@@ -13,9 +13,10 @@
 	"dependencies": {
 		"@ant-design/icons": "4.2.2",
 		"@hot-loader/react-dom": "16.13.0",
-		"antd": "4.5.2",
+		"antd": "4.5.3",
 		"classnames": "2.2.6",
 		"codemirror": "5.56.0",
+		"electron": "9.2.0",
 		"highlight.js": "10.1.2",
 		"markdown-it": "11.0.0",
 		"markdown-it-task-checkbox": "1.0.6",
@@ -29,7 +30,6 @@
 	},
 	"devDependencies": {
 		"cross-env": "7.0.2",
-		"electron": "9.1.2",
 		"electron-packager": "15.0.0"
 	},
 	"engines": {
